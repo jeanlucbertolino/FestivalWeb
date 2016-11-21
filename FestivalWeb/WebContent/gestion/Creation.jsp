@@ -214,7 +214,7 @@
 			else {%>
             <span><input type="submit" onclick="return valider()" value="modify schedule"></span>
             <% } %>
-			<span><input type="button" onclick="myfunction()" value="Planification"></span>
+			<span><input type="button" onclick="location.href='<%= request.getContextPath() %>/Festival/aff';" value="Planification"></span>
   		  	<span><input type="button" onclick="this.form.reset()" value="Clear"></span>
   		</DIV>
 

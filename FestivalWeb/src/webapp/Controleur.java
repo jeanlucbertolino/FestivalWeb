@@ -1,6 +1,7 @@
 package webapp;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -63,9 +64,8 @@ public class Controleur extends HttpServlet {
 
 	private void doFormScene(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		
-		disp = request.getRequestDispatcher("/planification/Scene.jsp");
-		disp.forward(request,response);		
+		// on passe la main au GET
+			doGet(request, response);
 	}
 
 	private void doAccueil(HttpServletRequest request,

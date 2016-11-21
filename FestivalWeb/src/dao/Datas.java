@@ -43,23 +43,30 @@ public class Datas {
 
 	}
 	
-public static String lastId() {
+public static int lastId() {
 
-	String id = "";
+	int id = 0;
 	Connection conn = SceneServ.connection;
 	
 	try {
 		Statement stmt = conn.createStatement();
-		String reqSql = "select max(id) from Scene2";
+//		String reqSql = "select max(id) as maxid from Scene2";
+		String reqSql = "SELECT id from Scene2 ORDER BY id DESC";
 		ResultSet result =stmt.executeQuery(reqSql);
-		
+		int top=0;
 		while( result.next() ){
-
-			id = result.getString (1); 
-//			String numduree = result.getString (2); 
-			if(id == null) {
-				id = "0";
+			if (top==0) {
+				System.out.println("top0 ...:"+top);
+//			id = result.getString (1);
+			top=1;
+				System.out.println("top1 ...:"+top);
+			id = result.getInt(1);
+				System.out.println("Idmax ...:"+id);
 			}
+//			String numduree = result.getString (2); 
+//			if(id == null) {
+//				id = "0";
+//			}
 		}
 		result.close();
 

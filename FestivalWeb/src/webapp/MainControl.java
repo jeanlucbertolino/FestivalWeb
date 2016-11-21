@@ -17,10 +17,6 @@ import dao.Datas;
 import metier.Scene;
 import technique.DateException;
 
-
-
-
-
 public class MainControl extends HttpServlet {
 	
 	public static Connection connection;
@@ -47,14 +43,10 @@ public class MainControl extends HttpServlet {
 			// Création instance Scene
 			// récupération valeur dernier id
 			
-			String lastId="0";
+			int lastId=0;
 			lastId=Datas.lastId();
 			System.out.println(lastId);
-			if (lastId.isEmpty()) {
-				lastId="0";
-			}
-			int derId=Integer.parseInt(lastId);
-			int id=derId+1;
+			int id=lastId+1;
 			
 			 try {
 				Scene scene = new Scene(id,groupe,datec,heure,duree);

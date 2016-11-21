@@ -51,15 +51,16 @@ public class SceneServ extends HttpServlet {
 			// Création instance Scene
 			// récupération valeur dernier id
 			
-			String lastId = new String();
-			lastId="0";
-			lastId=Datas.lastId();
+//			String lastId = new String();
+//			lastId="0";
+			int lastId=Datas.lastId();
 			System.out.println(lastId);
-			if (lastId.isEmpty()) {
-				lastId="0";
-			}
-			int derId=Integer.parseInt(lastId);
-			int id=derId+1;
+//			if (lastId.isEmpty()) {
+//				lastId="0";
+//			}
+//			int derId=Integer.parseInt(lastId);
+//			int id=derId+1;
+			int id=lastId+1;
 			
 			 try {
 				Scene scene = new Scene(id,groupe,datec,heure,duree);
@@ -131,18 +132,18 @@ public class SceneServ extends HttpServlet {
 			}
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-			// on passe la main au GET
-		PrintWriter out = response.getWriter() ;
-		response.setContentType( "text/html");
-		
-		// liste des emprunts existants
-		ArrayList<String[]> liste = Datas.listScene();
-//		ArrayList liste = new ArrayList();
-//		liste.add("Test");
-		request.setAttribute("listScene", liste);
-		
-		response.setContentType( "text/html");
-		RequestDispatcher rd = request.getRequestDispatcher("/planification/Scene.jsp");
-		rd.forward( request, response );
+//			// on passe la main au GET
+//		PrintWriter out = response.getWriter() ;
+//		response.setContentType( "text/html");
+//		
+//		// liste des emprunts existants
+//		ArrayList<String[]> liste = Datas.listScene();
+////		ArrayList liste = new ArrayList();
+////		liste.add("Test");
+//		request.setAttribute("listScene", liste);
+//		
+//		response.setContentType( "text/html");
+//		RequestDispatcher rd = request.getRequestDispatcher("/planification/Scene.jsp");
+//		rd.forward( request, response );
 			}
 	}
