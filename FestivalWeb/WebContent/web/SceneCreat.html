@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet" href="http://localhost:8085/FestivalWebV2/style/SceneCreat.css" />
+<link rel="stylesheet" media="screen, print, handheld" type="text/css" href="http://localhost:8085/FestivalWebV3/style/calendrier.css" />
+<script type="text/javascript" src="http://localhost:8085/FestivalWebV3/js/calendrier.js"></script>
+<title>Scene Creation</title>
+</head>
+<body>
+		<form id="form1" class="form" method="post" action="http://localhost:8085/FestivalWebV2/SceneServ">
+
+		<header>
+			<p>
+			<h1 id="titre1" style="font-style: bold;">Programmation d'une scène (Création)</h1>
+			</p>
+		</header>
+		<DIV class="div">
+		
+		<fieldset class="field1" id="selgroupe">
+			<legend>
+				<h4>Choisissez un Groupe SVP</h4>
+			</legend>
+			<p><label class="groupe">Groupe .....: </label>
+			<SELECT name="choixgroupe" id="selectgroupe" >
+			
+				<option>       </option>
+				<option> AC/DC </option> 
+				<option> IRON MAIDEN </option>
+				<option> KISS </option>
+				<option> AEROSMITH </option>
+				<option> DEEP PURPLE </option>
+			
+			</SELECT>
+			</fieldset>
+			<br> 
+			<br>
+		
+		<fieldset class="field2" id="seldate">
+			<legend>
+				<h4>Choisissez une Date SVP</h4>
+			</legend>
+			   <script>DateInput('orderdate', true, 'DD-MON-YYYY')</script>
+    		   <!input type="button" onClick="alert(this.form.orderdate.value)" value="sélectionner une date SVP">
+    		   <input type="button" onClick="datesel()" value="sélectionner une date SVP">
+    		   <p>Date : <input type="text" value="" name="choixdate" id="champ_date" size="12" maxlength="10"></p>
+			</fieldset>
+			<br> 
+			<br>
+
+			<fieldset class="field3" id="selheure">
+			<legend>
+				<h4>Choisissez une Heure SVP</h4>
+			</legend>
+			<p><label class="choixheure">Heure .....: </label>
+			<SELECT name="selheure" id="selectheure">
+			
+				<option>       </option>			
+				<option> 13:00 </option> 
+				<option> 13:30 </option>
+				<option> 14:00 </option>
+				<option> 14:30 </option>
+				<option> 15:00 </option>
+				<option> 15:30 </option> 
+				<option> 16:00 </option>
+				<option> 16:30 </option>
+				<option> 17:00 </option>
+				<option> 17:30 </option>
+				<option> 18:00 </option> 
+				<option> 18:30 </option>
+				<option> 19:00 </option>
+				<option> 19:30 </option>
+				<option> 20:00 </option>
+				<option> 20:30 </option> 
+				<option> 21:00 </option>
+				<option> 21:30 </option>
+				<option> 22:00 </option>
+				<option> 22:30 </option>
+				<option> 23:00 </option>
+				
+			</SELECT>
+			</fieldset>
+			<br> 
+			<br>
+				
+			<fieldset class="field4" id="selduree">
+			<legend>
+				<h4>Choisissez une Durée SVP</h4>
+			</legend>
+			<p><label class="choixduree">Durée .....: </label>
+			<SELECT name="selduree" id="selectduree">
+			
+				<option>       </option>			
+				<option> 1:00 </option> 
+				<option> 1:30 </option>
+				<option> 2:00 </option>
+			
+			</SELECT>
+			</fieldset>
+			<br> 
+			<br>							
+
+		</DIV>
+		<DIV class="div">	
+			<fieldset class="field1">
+			<legend>
+				<h4>programmation groupe</h4>
+			</legend>
+  			<p id="titregroupe"><label for="groupesel">Groupe sélectionné : </label></p><input id="groupesel" type="text" name="groupesel" size="30" maxlength="10">
+  			</fieldset>
+
+			<br>
+			<fieldset class="field2">
+			<legend>
+				<h4>programmation Date</h4>
+			</legend>			
+  			<p id="titredate"><label for="datesel">Date sélectionnée  : </label></p><input id="datesel" type="text" name="datesel" size="20" maxlength="10">
+  			</fieldset>
+
+			<br>
+			<fieldset class="field3">
+			<legend>
+				<h4>programmation Heure</h4>
+			</legend>
+  			<p id="titreheure"><label for="heuresel">Heure sélectionnée : </label></p><input id="heuresel" type="text" name="heuresel" size="10" maxlength="5">
+  			</fieldset>
+
+			<br>
+			<fieldset class="field4">
+			<legend>
+				<h4>programmation Durée</h4>
+			</legend>
+  			<p id="titreduree"><label for="dureesel">Durée sélectionnée  : </label></p><input id="dureesel" type="text" name="dureesel" size="5" maxlength="5">
+  			</fieldset>
+
+			<br>
+  			
+  		</DIV>
+  		<DIV class="div">
+  		  	<span><input type="submit" onclick="return controler()" value="create schedule"></span>
+  		  	<span><input type="button" onclick="this.form.reset()" value="Clear"></span>
+  		</DIV>
+
+	</form>			
+
+ <script type="text/javascript" src="http://localhost:8085/FestivalWebV3/js/creatScene.js"></script>			
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+body {background:url("../images/bg_color.jpg");
+background-size:cover;}
+
+/* juxtaposer les blocs */
+.div { 
+display:inline-block; 
+border: 2px solid gold;  
+text-align:center; 
+}
+
+ul#menu_horizontal {
+list-style-type : none; /*  */
+}
+
+.ligne {
+  color: 	 ;
+  
+}
+/* paragraphes */
+p {
+	text-decoration : underline; 
+}
+/* Bloc Groupe */
+.field1 {
+	background-color: #c6ffb3 ; 
+}
+/* Bloc Date */
+.field2 {
+	background-color: #d9ffcc ; 
+}
+/* Bloc Heure */
+.field3 {
+	background-color: #b3ff99 ; 
+}
+/* Bloc Durée */
+.field4 {
+	background-color: #d9ffcc ; 
+}
+
+h1 {
+	background-color: #004d00 ;
+	color: #e6ffe6; 
+}
+
+h2 {
+	color: gold;
+}
+h3 {
+	color: #004d00;
+}
+
+#titre1 {
+	 text-align: center;
+	 margin-left: auto;
+  	 margin-right: auto;
+}
+
+.erreur {
+	background-color: red ;
+	color: red;
+}
+.centrage {text-align: center;
+	}
+ 
