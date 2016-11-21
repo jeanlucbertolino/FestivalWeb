@@ -59,7 +59,7 @@
 			if (request.getAttribute("maj") == null) {%>
 			<fieldset>
 			<legend>
-				<h2>CREATION D'UNE SCENE N° </h2>
+				<h2>CREATION D'UNE SCENE</h2>
 			</legend>
 			<%} %>
 		<fieldset class="field1" id="selgroupe">
@@ -214,7 +214,7 @@
 			else {%>
             <span><input type="submit" onclick="return valider()" value="modify schedule"></span>
             <% } %>
-			<span><input type="button" onclick="myfunction()" value="Plannification"></span>
+			<span><input type="button" onclick="myfunction()" value="Planification"></span>
   		  	<span><input type="button" onclick="this.form.reset()" value="Clear"></span>
   		</DIV>
 
