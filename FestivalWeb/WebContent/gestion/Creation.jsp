@@ -214,7 +214,7 @@
 			else {%>
             <span><input type="submit" onclick="return valider()" value="modify schedule"></span>
             <% } %>
-			<span><input type="button" value="Plannification"></span>
+			<span><input type="button" onclick="myfunction()" value="Plannification"></span>
   		  	<span><input type="button" onclick="this.form.reset()" value="Clear"></span>
   		</DIV>
 
