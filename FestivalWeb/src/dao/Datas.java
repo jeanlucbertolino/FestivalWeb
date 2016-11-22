@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import webapp.Controleur;
 import webapp.SceneServ;
 
 public class Datas {
@@ -25,7 +26,8 @@ public class Datas {
  * 
  * 
  */
-		Connection conn = SceneServ.connection;
+		Connection conn = Controleur.connection;
+
 		try {
 			System.out.println("connexion =" + conn);
 			
@@ -46,7 +48,8 @@ public class Datas {
 public static int lastId() {
 
 	int id = 0;
-	Connection conn = SceneServ.connection;
+	Connection conn = Controleur.connection;
+
 	
 	try {
 		Statement stmt = conn.createStatement();
@@ -80,12 +83,11 @@ public static int lastId() {
 public static ArrayList<String[]> listScene() {
 
 ArrayList<String[]> myNumberList = new ArrayList<String[]>();
-Connection conn = SceneServ.connection;
-
+Connection conn = Controleur.connection;
 
 try {
 	Statement stmt = conn.createStatement();
-	String reqSql = "select * from Scene2 order by id";
+	String reqSql = "select id,groupe,datec,heure,duree from Scene2 order by id";
 	ResultSet result =stmt.executeQuery(reqSql);
 
 	while( result.next() ){
@@ -118,7 +120,8 @@ return myNumberList;
 }
 public static void suppSceneBdD(int id) {
 	// TODO Auto-generated method stub
-	Connection conn = SceneServ.connection;
+	Connection conn = Controleur.connection;
+
 	try {
 		System.out.println("connexion =" + conn);
 		
@@ -139,11 +142,11 @@ public static void suppSceneBdD(int id) {
 public static ArrayList<String[]> modifSceneBdD(int id) {
 	// TODO Auto-generated method stub
 	ArrayList<String[]> liste = new ArrayList<String[]>();
-	Connection conn = SceneServ.connection;
+	Connection conn = Controleur.connection;
 	
 	try {
 		Statement stmt = conn.createStatement();
-		String reqSql = "select * from Scene2 where id="+id;
+		String reqSql = "select id,groupe,datec,heure,duree from Scene2 where id="+id;
 		ResultSet result =stmt.executeQuery(reqSql);
 
 		while( result.next() ){
@@ -184,7 +187,8 @@ public static void majScene2BdD(int id, String groupe, String datec, String heur
 	 * 
 	 * 
 	 */
-			Connection conn = SceneServ.connection;
+			Connection conn = Controleur.connection;
+
 			try {
 				System.out.println("connexion =" + conn);
 				
@@ -216,12 +220,15 @@ public static ArrayList<String[]> SearchScene(String £groupe, String £datec, Str
 	// TODO Auto-generated method stub
 
 ArrayList<String[]> myNumberList = new ArrayList<String[]>();
-Connection conn = SceneServ.connection;
+Connection conn = Controleur.connection;
 
 
 try {
 	Statement stmt = conn.createStatement();
-	String reqSql = "select * from Scene2 where groupe = "+£groupe+" and datec = "+£datec+" and heure = "+£heure+ "and duree = "+£duree+"";
+	String reqSql = "select groupe,datec,heure,duree from Scene2 where groupe like '"+£groupe+"%' and datec like '"+£datec+"%' and heure like '"+£heure+ "%' and duree like '"+£duree+"%'";
+	
+	System.out.println("ReqSql ...:"+reqSql);
+	
 	ResultSet result =stmt.executeQuery(reqSql);
 
 	while( result.next() ){

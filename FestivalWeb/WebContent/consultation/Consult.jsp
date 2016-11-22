@@ -8,7 +8,7 @@ pageEncoding="ISO-8859-1"%>
 <link rel="stylesheet" href="http://localhost:8085/FestivalWeb/style/SceneCreat.css" />
 <title>Gestion des Scenes</title>
 </head>
-<body><form action="<%= request.getContextPath() %>/Festival/planification/recherche" method="post">
+<body><form action="<%= request.getContextPath() %>/Festival/planification/recherche" method="get">
 		<header>
 			<p>
 			<h1 id="titre1" style="font-style: bold;">CONSULTATION D'UNE SCENE</h1>
@@ -66,7 +66,7 @@ for (int i=0; i<liste.size();i++)
 
 %>
 <tr>
-<td><%=ligne[1] %></td><td><%=ligne[2] %></td><td><%=ligne[3] %></td><td><%=ligne[4] %></td></tr>
+<td><%=ligne[0] %></td><td><%=ligne[1] %></td><td><%=ligne[2] %></td><td><%=ligne[3] %></td></tr>
 <%
     }
 }

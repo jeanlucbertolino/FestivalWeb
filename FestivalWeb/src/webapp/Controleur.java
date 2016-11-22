@@ -2,6 +2,7 @@ package webapp;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.Connect;
 import dao.Datas;
 
 /**
@@ -22,9 +24,15 @@ import dao.Datas;
 		urlPatterns = {"/Festival/*"}
 		)
 public class Controleur extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
-
+	public static Connection connection;
 	private RequestDispatcher 	disp;
+	
+    public void init() {
+    	connection = Connect.initConnexion();
+    	System.out.println("connexion :"+connection);
+    }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

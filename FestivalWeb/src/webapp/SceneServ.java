@@ -21,14 +21,14 @@ import technique.DateException;
 @WebServlet("/Festival/planification/*")
 public class SceneServ extends HttpServlet {
 	
-	public static Connection connection;
+//	public static Connection connection;
 	private static final long serialVersionUID = 1L;	
 	private RequestDispatcher 	disp;
 	
 	// initialisation de la connexion
     public void init() {
-        	connection = Connect.initConnexion();
-        	System.out.println("connexion :"+connection);
+//        	connection = Connect.initConnexion();
+//        	System.out.println("connexion :"+connection);
         }
 	
 	protected void doPost (HttpServletRequest request, HttpServletResponse response)
@@ -142,7 +142,7 @@ public class SceneServ extends HttpServlet {
 					doAccueil(request, response);
 				}
 				if (path.equals("/recherche")) {
-					doAccueil(request, response);
+					doRecherche(request, response);
 				}
 			}
 	private void doAccueil(HttpServletRequest request,
@@ -164,8 +164,8 @@ public class SceneServ extends HttpServlet {
 			listeScene=Datas.SearchScene(groupe,datec,heure,duree);
 			request.setAttribute("listScene", listeScene);
 				
-//			disp = request.getRequestDispatcher("/consultation/Consult.jsp");
-//			disp.forward(request,response);	
+			disp = request.getRequestDispatcher("/consultation/Consult.jsp");
+			disp.forward(request,response);	
 			
 		}
 }
