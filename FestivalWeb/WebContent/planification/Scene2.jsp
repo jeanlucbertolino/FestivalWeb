@@ -15,54 +15,25 @@ pageEncoding="ISO-8859-1"%>
 			</p>
 		</header>
 <div class="centrage">
-<%
-String sup = (String) request.getAttribute("sup");
-if (request.getAttribute("sup") == null) { 
-%>
-<h2><p>Dernier enregistrement créé</p></h2>
-<%
-}
-else {
-%>
-<div class="centrage">
-<h2><p>Dernier enregistrement supprimé</p></h2>
-<% 	
-}
-%>
-</br>
-<table border="1" align="center"  width="600">
-<%
 
-int id = (int) request.getAttribute("id");
-String groupe = (String) request.getAttribute("groupe");
-String datec = (String) request.getAttribute("datec");
-String heure = (String) request.getAttribute("heure");
-String duree = (String) request.getAttribute("duree");
+</br>
+<%
 
 ArrayList<String[]> liste =  (ArrayList<String[]>) request.getAttribute("listScene"); 
 
 %>
 
-<tr>
-<td><h4><p>Id</p></h4></td><td><h4><p>Groupe</h4></td><td><h4><p>Date</h4></td><td><h4><p>Heure</h4></td><td><h4><p>Duree</h4></td></TR>
-<tr><td><%=id %></td><td><%=groupe %></td><td><%=datec %></td><td><%=heure %></td><td><%=duree %></td></TR>
-</table></br>
-</div>
+
 </br>
 <div class="centrage">
 
-<h3><p>LISTE DES GROUPES</p></h3></br>
+<h3><p>RUNING ORDER</p></h3></br>
 			
 <%-- Affichage des Scènes existantes --%>
 <table border='1' align="center"  width="800">
 <tr><td>Suppression</td><td>Modification</td><td>Groupe</td><td>Date</td><td>Heure</td><td>Duree</td></tr>
 <%
-System.out.println("sup ...:"+sup);
-System.out.println("id ...:"+id);
-System.out.println("groupe ...:"+groupe);
-System.out.println("datec ...:"+datec);
-System.out.println("heure ...:"+heure);
-System.out.println("duree ...:"+duree);
+
 System.out.println("ListeScene ...:"+liste);
 if (liste.size()!= 0) {
 for (int i=0; i<liste.size();i++)

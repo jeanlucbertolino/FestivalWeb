@@ -19,7 +19,7 @@ import technique.DateException;
 
 
 @WebServlet("/Festival/planification/*")
-public class SceneServ extends HttpServlet {
+public class SceneServ2 extends HttpServlet {
 	
 	public static Connection connection;
 	private static final long serialVersionUID = 1L;	
@@ -142,7 +142,7 @@ public class SceneServ extends HttpServlet {
 					doAccueil(request, response);
 				}
 				if (path.equals("/recherche")) {
-					doRecherche(request, response);
+					doAccueil(request, response);
 				}
 			}
 	private void doAccueil(HttpServletRequest request,
@@ -151,13 +151,4 @@ public class SceneServ extends HttpServlet {
 		disp.forward(request,response);	
 		
 	}
-	private void doRecherche(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		
-			
-		
-			disp = request.getRequestDispatcher("/gestion/Creation.jsp");
-			disp.forward(request,response);	
-			
-		}
 }

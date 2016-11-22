@@ -48,6 +48,10 @@ public class Controleur extends HttpServlet {
 		if (path.equals("/aff")) {
 			doFormScene(request, response);
 		};
+		// Consultation de la planification + Recherche
+				if (path.equals("/consult")) {
+					doconsultScene(request, response);
+				};
 		// Modification de l'enregistrement
 		if (path.equals("/modif")) {
 			doModif(request, response);
@@ -64,8 +68,14 @@ public class Controleur extends HttpServlet {
 
 	private void doFormScene(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		// on passe la main au GET
-			doGet(request, response);
+		// Affichage de la programmation de la scène
+		
+		ArrayList<String[]> listeScene = new ArrayList<String[]>();
+		listeScene=Datas.listScene();
+		request.setAttribute("listScene", listeScene);
+		
+		disp = request.getRequestDispatcher("/planification/Scene2.jsp");
+		disp.forward(request,response);
 	}
 
 	private void doAccueil(HttpServletRequest request,
@@ -130,6 +140,17 @@ public class Controleur extends HttpServlet {
 		request.setAttribute("liste", liste);
 				
 		disp = request.getRequestDispatcher("/gestion/Creation.jsp");
+		disp.forward(request,response);
+	}
+	// Consultation + Recherche organisation de la scène
+	protected void doconsultScene(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// Affichage de la consultation programmation d'une scène
+		
+		ArrayList<String[]> listeScene = new ArrayList<String[]>();
+		listeScene=Datas.listScene();
+		request.setAttribute("listScene", listeScene);
+		
+		disp = request.getRequestDispatcher("/consultation/Consult.jsp");
 		disp.forward(request,response);
 	}
 }
