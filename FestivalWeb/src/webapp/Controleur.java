@@ -16,36 +16,59 @@ import dao.Connect;
 import dao.Datas;
 
 /**
- * Servlet implementation class Controleur
+ * Servlet implementation class Controleur. Cette servlet permet de lancer l'application
+ * et d'aiguiller les différents appels vers les MAJ de BdD et la gestion des transactions associées
+ * l'annotation indique que toutes les URL ayant pour racine 'Festival/*' viendront se connecter à cette servlet de contrôle
  */
 @WebServlet(
 		name = "Controleur", 
 		description = "Controleur General", 
 		urlPatterns = {"/Festival/*"}
 		)
+
+/**
+ * la classe controleur est de type servlet
+ * On lui définit une variable de type connection initialisée depuis la méthode init() (appelée par défaut à la construction
+ * de la servlet par le serveur d'applications)
+ *
+ */
 public class Controleur extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	public static Connection connection;
 	private RequestDispatcher 	disp;
-	
+/**
+ * La méthode init() s'éxécute par défaut et appelle la méthode Connect.initConnexion() qui retourne une variable
+ * de type Connection définie comme constante (final) dans l'instance de la servlet controleur et à laquelle 
+ * toutes les opérations de MAJ de la BdD feront référence (évitant ainsi les accès répétitifs au connecteur (connect.java) 
+ */
     public void init() {
     	connection = Connect.initConnexion();
     	System.out.println("connexion :"+connection);
     }
 
+ /**
+  * La méthode doGet est appelée dès qu'une requête est exécutée par la méthode GET (utilisée de préférence en cas d'absence de
+  * modification d'état de la BdD ou général de l'application)
+  */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		// recuperation de l'url (à partir du chemin relatif à la servlet application cad après /bb)
+		// recuperation de l'url (à partir du chemin relatif à la servlet c'est à dire consécutif à la racine /Festival/)
 		String path = request.getPathInfo();
+		
+		// Affichage console des path pour vérification
 		System.out.println("================  dans Controleur path=" + path );
 		System.out.println("================  dans Controleur path contexte =" + request.getContextPath() );
 		
+		// si la requête ne fait aucune à une URL particulière
+		// appel de la méthode DoAccueil
 		if (path == null || path.equals("/")) {
 			doAccueil(request, response);
 		}
-		else if (path.equals("/planification")) {
-			// affichage formulaire gestion des bonbons
+		
+		// si l'URL est /Festival/runingorder
+		else if (path.equals("/runingorder")) {
+			
 			doFormScene(request, response);
 		}
 //		else {
@@ -73,7 +96,15 @@ public class Controleur extends HttpServlet {
 		System.out.println("** Fin Controleur");
 	}
 
-
+/**
+ * La méthode doFormScene permet l'affichage du formulaire de gestion de la liste des groupes planifiés pour une scène
+ * cette liste permet de choisir une programmation de groupe en vue de sa modification (débranchement vers le formulaire
+ * de gestion) ou de supprimer directement une programmation depuis la liste
+ * @param request	: passage de la liste des planifications actives par appel de la méthode Datas.listscene() au formulaire "planification/Scene2.jsp"
+ * @param response
+ * @throws ServletException
+ * @throws IOException
+ */
 	private void doFormScene(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// Affichage de la programmation de la scène
@@ -85,7 +116,14 @@ public class Controleur extends HttpServlet {
 		disp = request.getRequestDispatcher("/planification/Scene2.jsp");
 		disp.forward(request,response);
 	}
-
+	
+/** Cette méthode appelle le formulaire de création d'une programmation d'une scène
+ * 
+ * @param request
+ * @param response
+ * @throws ServletException
+ * @throws IOException
+ */
 	private void doAccueil(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		disp = request.getRequestDispatcher("/gestion/Creation.jsp");
@@ -94,7 +132,10 @@ public class Controleur extends HttpServlet {
 //		//on demande au navigateur de réémettre cette requete
 //		response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/index.jsp"));
 	}
-
+	 /**
+	  * La méthode doPost est appelée dès qu'une requête est exécutée par la méthode POST (utilisée de préférence en cas de
+	  * modification d'état de la BdD ou général de l'application)
+	  */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
@@ -134,13 +175,23 @@ public class Controleur extends HttpServlet {
 		disp = request.getRequestDispatcher("/planification/Scene.jsp");
 		disp.forward(request,response);
 	}
-//	Modification de l'occurrence
+	
+/**	Modification d'une planification de groupe pour une scène	
+ * 
+ * @param request	Réception d'un paramètre de type int correspondant à l'ID de la classe scène
+ * 					la méthode initialise également un paramètre maj="ok" pour signifier qu'il s'agit d'une MAJ au formulaire "/gestion/Creation.jsp"
+ * @param response
+ * @throws ServletException
+ * @throws IOException
+ */
 	protected void doModif(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		int id= Integer.parseInt(request.getParameter("id"));
-		// Update table Emprunt
-		ArrayList<String[]> liste=Datas.modifSceneBdD(id);
 		
+		// Réception d'un paramètre ID de type int
+		int id= Integer.parseInt(request.getParameter("id"));
+		
+		// constitution d'une liste de scène ayant même ID (en principe unique)
+		ArrayList<String[]> liste=Datas.modifSceneBdD(id);
+				
 		String maj= "ok";
 		
 		request.setAttribute("maj", maj);
@@ -150,7 +201,13 @@ public class Controleur extends HttpServlet {
 		disp = request.getRequestDispatcher("/gestion/Creation.jsp");
 		disp.forward(request,response);
 	}
-	// Consultation + Recherche organisation de la scène
+	/** Cette méthode affiche un formulaire de consultation + Recherche multi-critères (groupe-date-heure-durée) de l'organisation d'une scène
+	 * 
+	 * @param request	: passage de la liste des planifications actives par appel de la méthode Datas.listscene() au formulaire "/consultation/Consult.jsp"	
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	protected void doconsultScene(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// Affichage de la consultation programmation d'une scène
 		

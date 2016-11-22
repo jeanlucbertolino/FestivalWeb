@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
         <%@ page import="java.util.*,java.io.*" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -212,7 +213,7 @@
   		  	<span><input type="submit" onclick="return valider()" value="create schedule"></span>
             <%} 
 			else {%>
-            <span><input type="submit" onclick="return valider()" value="modify schedule"></span>
+            <span><input type="submit" onclick="return modifier()" value="modify schedule"></span>
             <% } %>
 			<span><input type="button" onclick="location.href='<%= request.getContextPath() %>/Festival/aff';" value="Planification"></span>
 			<span><input type="button" onclick="location.href='<%= request.getContextPath() %>/Festival/consult';" value="Consultation"></span>

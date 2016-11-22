@@ -2,22 +2,6 @@
 function controler(){
 	
 	console.log("contrôles saisie en cours ...");
-/*	
-	// <!-- Affichage des infos saisies
-		// <!-- Groupe
-		var groupe = document.getElementById("selectgroupe").value;
-		document.getElementById('groupesel').value = groupe;
-		
-		// <!-- Date
-	// <!-- var date = document.getElementById("selectdate").value;
-	// <!-- document.getElementById('datesel').value = date;
-		// <!-- Heure
-		var heure = document.getElementById("selectheure").value;
-		document.getElementById('heuresel').value = heure;
-		
-		// <!-- Durée
-		var duree = document.getElementById("selectduree").value;
-		document.getElementById('dureesel').value = duree;		*/  			
 
 	// <!-- Contrôle des infos saisies
 	var rq,rq1,rq2,rq3,rq4;
@@ -46,7 +30,8 @@ function controler(){
 	var dureefield=document.getElementById("selduree");
 	
 	// <!-- contrôle saisie Groupe	
-	  	if (groupeselvalue=="") {
+	  	
+		if (groupeselvalue=="") {
 	  		alert(rq1);
 	  		groupesel.style.backgroundColor="red";
 	 		groupefield.className="erreur";
@@ -137,5 +122,28 @@ function valider(){
 	return xboolean;
 	
 	}
-
+function modifier(){
+	// <!-- Affichage des infos saisies
+	// <!-- Groupe
+	var groupe = document.getElementById("selectgroupe").value;
+	if (groupe!=" ") {
+	document.getElementById('groupesel').value = groupe;
+	}
+	// <!-- Date
+// <!-- var date = document.getElementById("selectdate").value;
+// <!-- document.getElementById('datesel').value = date;
+	// <!-- Heure
+	var heure = document.getElementById("selectheure").value;
+	if (heure!=" ") {
+	document.getElementById('heuresel').value = heure;
+	}
+	// <!-- Durée
+	var duree = document.getElementById("selectduree").value;
+	if (duree!=" ") {
+	document.getElementById('dureesel').value = duree;
+	}
+	var xboolean=controler();
+	return xboolean;
+	
+	}
  
