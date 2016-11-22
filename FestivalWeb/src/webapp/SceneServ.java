@@ -142,7 +142,7 @@ public class SceneServ extends HttpServlet {
 					doAccueil(request, response);
 				}
 				if (path.equals("/recherche")) {
-					doRecherche(request, response);
+					doAccueil(request, response);
 				}
 			}
 	private void doAccueil(HttpServletRequest request,
@@ -153,11 +153,19 @@ public class SceneServ extends HttpServlet {
 	}
 	private void doRecherche(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+			// Constitution de la liste des groupes en fonction des critères de recherche
 		
-			
+			String groupe= request.getParameter("groupe");
+			String datec= request.getParameter("datec");
+			String heure= request.getParameter("heure");
+			String duree= request.getParameter("duree");
 		
-			disp = request.getRequestDispatcher("/gestion/Creation.jsp");
-			disp.forward(request,response);	
+			ArrayList<String[]> listeScene = new ArrayList<String[]>();
+			listeScene=Datas.SearchScene(groupe,datec,heure,duree);
+			request.setAttribute("listScene", listeScene);
+				
+//			disp = request.getRequestDispatcher("/consultation/Consult.jsp");
+//			disp.forward(request,response);	
 			
 		}
 }

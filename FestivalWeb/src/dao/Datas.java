@@ -212,4 +212,43 @@ public static void majScene2BdD(int id, String groupe, String datec, String heur
 			}	
 }
 
+public static ArrayList<String[]> SearchScene(String £groupe, String £datec, String £heure, String £duree) {
+	// TODO Auto-generated method stub
+
+ArrayList<String[]> myNumberList = new ArrayList<String[]>();
+Connection conn = SceneServ.connection;
+
+
+try {
+	Statement stmt = conn.createStatement();
+	String reqSql = "select * from Scene2 where groupe = "+£groupe+" and datec = "+£datec+" and heure = "+£heure+ "and duree = "+£duree+"";
+	ResultSet result =stmt.executeQuery(reqSql);
+
+	while( result.next() ){
+		
+		String[] strTab = new String[5];
+
+		String groupe = result.getString (1);
+		String datec = result.getString (2); 
+ 		String heure = result.getString (3);
+ 		String duree = result.getString (4);
+ 		
+ 		strTab[0]=groupe;
+ 		strTab[1]=datec;
+ 		strTab[2]=heure;
+ 		strTab[3]=duree;
+ 		
+ 		myNumberList.add(strTab);
+
+	}
+	result.close();
+
+} catch (SQLException e) {
+	// TODO Auto-generated catch block
+	e.printStackTrace();
+}
+
+return myNumberList;
+}
+
 }

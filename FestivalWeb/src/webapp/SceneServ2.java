@@ -18,7 +18,7 @@ import metier.Scene;
 import technique.DateException;
 
 
-@WebServlet("/Festival/planification/*")
+@WebServlet("/Festival/planification2/*")
 public class SceneServ2 extends HttpServlet {
 	
 	public static Connection connection;

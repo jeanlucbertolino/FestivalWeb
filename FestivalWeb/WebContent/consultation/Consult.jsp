@@ -8,7 +8,7 @@ pageEncoding="ISO-8859-1"%>
 <link rel="stylesheet" href="http://localhost:8085/FestivalWeb/style/SceneCreat.css" />
 <title>Gestion des Scenes</title>
 </head>
-<body><form action="<%= request.getContextPath() %>/Festival/" method="post">
+<body><form action="<%= request.getContextPath() %>/Festival/planification/recherche" method="post">
 		<header>
 			<p>
 			<h1 id="titre1" style="font-style: bold;">CONSULTATION D'UNE SCENE</h1>
@@ -40,7 +40,7 @@ ArrayList<String[]> liste =  (ArrayList<String[]>) request.getAttribute("listSce
 			</td>
 			<%-- Bouton Rechercher --%>
 			<td>
-			<span><input type="button" onclick="location.href='<%= request.getContextPath() %>/Festival/planification/recherche';" value="Recherche" ></input></span>
+			<span><input type="submit" value="Recherche" ></input></span>
 			</td>
 			</tr>
 			</table>
@@ -79,7 +79,7 @@ for (int i=0; i<liste.size();i++)
 
 <div id="div_retour" class="centrage">
 <table border="" align="center">
-<span><input type="submit" value="Programmation" ></input></span>
+<span><input type="button" onclick="location.href='<%= request.getContextPath() %>/Festival/';" value="Programmation" ></input></span>
 </table>
 </div>
 
