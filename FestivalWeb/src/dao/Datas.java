@@ -225,7 +225,7 @@ Connection conn = Controleur.connection;
 
 try {
 	Statement stmt = conn.createStatement();
-	String reqSql = "select groupe,datec,heure,duree from Scene2 where groupe like '"+£groupe+"%' and datec like '"+£datec+"%' and heure like '"+£heure+ "%' and duree like '"+£duree+"%'";
+	String reqSql = "select id,groupe,datec,heure,duree from Scene2 where groupe like '"+£groupe+"%' and datec like '"+£datec+"%' and heure like '"+£heure+ "%' and duree like '"+£duree+"%'";
 	
 	System.out.println("ReqSql ...:"+reqSql);
 	
@@ -235,15 +235,17 @@ try {
 		
 		String[] strTab = new String[5];
 
-		String groupe = result.getString (1);
-		String datec = result.getString (2); 
- 		String heure = result.getString (3);
- 		String duree = result.getString (4);
+		String id = result.getString (1);
+		String groupe = result.getString (2);
+		String datec = result.getString (3); 
+ 		String heure = result.getString (4);
+ 		String duree = result.getString (5);
  		
- 		strTab[0]=groupe;
- 		strTab[1]=datec;
- 		strTab[2]=heure;
- 		strTab[3]=duree;
+ 		strTab[0]=id;
+ 		strTab[1]=groupe;
+ 		strTab[2]=datec;
+ 		strTab[3]=heure;
+ 		strTab[4]=duree;
  		
  		myNumberList.add(strTab);
 

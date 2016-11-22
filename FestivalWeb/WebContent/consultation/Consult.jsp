@@ -66,7 +66,7 @@ for (int i=0; i<liste.size();i++)
 
 %>
 <tr>
-<td><%=ligne[0] %></td><td><%=ligne[1] %></td><td><%=ligne[2] %></td><td><%=ligne[3] %></td></tr>
+<td><%=ligne[1] %></td><td><%=ligne[2] %></td><td><%=ligne[3] %></td><td><%=ligne[4] %></td></tr>
 <%
     }
 }

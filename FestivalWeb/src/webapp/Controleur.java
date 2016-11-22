@@ -156,6 +156,7 @@ public class Controleur extends HttpServlet {
 		
 		ArrayList<String[]> listeScene = new ArrayList<String[]>();
 		listeScene=Datas.listScene();
+
 		request.setAttribute("listScene", listeScene);
 		
 		disp = request.getRequestDispatcher("/consultation/Consult.jsp");
