@@ -37,20 +37,22 @@
 			<input id="maj" type="hidden" name="maj" value="<%= maj%>"/>
 			<input id="id" type="hidden" name="id" value="<%= id%>"/>
 			<legend>
-				<h4>MODIFICATION DE LA SCENE N° </h4>
+				<h2>MODIFICATION DE LA SCENE N° </h2>
 			</legend>
 			<p><label class="infos_id">
-			Id    : 
+			<h2>
+			<!-- Id    : -->
 			<!--  <input type="text" name="id" id="numlect" maxlength="5" 
 			size="5" readonly="readonly" -->
 			<% 
 				if (request.getAttribute("maj") != null)
 				{ %><%=id %><% } 
 			%>
+			</h2>
 			</label>
 			</p>
-			<br> 
-			<br>
+			</br> 
+			</br>
 			</fieldset> 
 			<%
 						
@@ -76,6 +78,11 @@
 				<option> KISS </option>
 				<option> AEROSMITH </option>
 				<option> DEEP PURPLE </option>
+				<option> DEPECHE MODE </option> 
+				<option> THE CURE </option>
+				<option> U2 </option>
+				<option> TEARS FOR FEARS </option>
+				<option> THE ROLLING STONES </option>
 			
 			</SELECT>
 			</fieldset>
@@ -87,8 +94,8 @@
 				<h3>Choisissez une Date SVP</h3>
 			</legend>
 			   <script>DateInput('orderdate', true, 'DD-MON-YYYY')</script>
-    		   <!input type="button" onClick="alert(this.form.orderdate.value)" value="sélectionner une date SVP">
-    		   <input type="button" onClick="datesel()" value="sélectionner une date SVP">
+    		   <input type="button" onClick="alert(this.form.orderdate.value)" value="sélectionner une date SVP">
+    		   <!input type="button" onClick="datesel()" value="sélectionner une date SVP">
     		   <p>Date : <input type="text" value="" name="choixdate" id="champ_date" size="12" maxlength="10"></p>
 			</fieldset>
 			<br> 
