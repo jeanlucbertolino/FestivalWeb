@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import metier.Cdifestivalband;
 import metier.Duree;
 import metier.Heure;
 import webapp.Controleur;
@@ -290,6 +291,50 @@ return myNumberList;
 public static ArrayList<String[]> initGroupe() {
 	// TODO Auto-generated method stub
 	ArrayList<String[]> groupeList = new ArrayList<String[]>();
+	Connection conn = Controleur.connection;
+
+	try {
+		Statement stmt = conn.createStatement();
+		String reqSql = "select band_id,band_name,band_biography,band_website from cdifestival_band order by band_id";
+		
+		System.out.println("ReqSql ...:"+reqSql);
+		
+		ResultSet result =stmt.executeQuery(reqSql);
+
+		while( result.next() ){
+			
+			int bandid = result.getInt(1);
+			String bandname = result.getString(2);
+			String bandbiography = result.getString(3);
+			String bandwebsite = result.getString(4);
+			
+			// Création d'un objet cdifestivalband pour chaque enregistrement de la table cdifestivalband sélectionné			
+			Cdifestivalband cdifestivalband = new Cdifestivalband(bandid,bandname,bandbiography,bandwebsite);
+			
+			// Renseigner la liste à renvoyer à la servlet
+			String[] strTab = new String[4];
+
+			int bandId = cdifestivalband.getBand_id();
+			String bandName = cdifestivalband.getBand_name();
+			String bandBiography = cdifestivalband.getBand_biography();
+			String bandWebsite = cdifestivalband.getBand_website();
+	 		
+			// Conversion ID durée en String
+			String bandIdS = Integer.toString(bandId);
+	 		strTab[0]= bandIdS;
+	 		strTab[1]=bandName;
+	 		strTab[2]=bandBiography;
+	 		strTab[3]=bandBiography;
+	 		
+	 		groupeList.add(strTab);
+
+		}
+		result.close();
+
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 	return groupeList;
 }
 
@@ -405,6 +450,34 @@ public static ArrayList<String[]> initDuree() {
 	
 	
 	return dureeList;
+}
+public static Boolean controlplanif(String groupe,String datec,String heure,String duree) {
+	// Contrôle si pas de programmation prévue pour un autre groupe à cette Date/heure
+	
+	Connection conn = Controleur.connection;
+	Boolean okplanif=false;
+	
+	try {
+		Statement stmt = conn.createStatement();
+		String reqSql = "select id from Scene2 where datec='"+datec+"' and heure='"+heure+"'";
+		
+		System.out.println("ReqSql ...:"+reqSql);
+		
+		ResultSet result =stmt.executeQuery(reqSql);
+		
+		while( result.next() ){
+			
+			System.out.println("planification existe déjà ...:"+groupe);	
+			okplanif=true;
+		}
+		result.close();
+
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+	return okplanif;
 }
 
 }

@@ -119,7 +119,7 @@ public class Controleur extends HttpServlet {
 	
 /** Cette méthode appelle le formulaire de création d'une programmation d'une scène
  * 	Les informations requises sont le groupe - la date - l'heure et la durée qui définiront une "scène" ou programmation
- * @param request
+ * @param requestpassage de la liste des groupes/heures/durées actives au formulaire "/gestion/Creation.jsp"
  * @param response
  * @throws ServletException
  * @throws IOException
@@ -127,7 +127,9 @@ public class Controleur extends HttpServlet {
 	private void doAccueil(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// Récupération des groupes
-//		ArrayList<String[]> listegroupe = Datas.initDuree();
+		ArrayList<String[]> listegroupe = Datas.initGroupe();
+		request.setAttribute("listeGroupe", listegroupe);
+		
 		// Récupération des heures
 		ArrayList<String[]> listeheure = Datas.initHeure();
 		request.setAttribute("listeHeure", listeheure);
@@ -213,7 +215,9 @@ public class Controleur extends HttpServlet {
 				
 		String maj= "ok";
 		// Récupération des groupes
-//		ArrayList<String[]> listegroupe = Datas.initDuree();
+		ArrayList<String[]> listegroupe = Datas.initGroupe();
+		request.setAttribute("listeGroupe", listegroupe);
+		
 		// Récupération des heures
 		ArrayList<String[]> listeheure = Datas.initHeure();
 		request.setAttribute("listeHeure", listeheure);

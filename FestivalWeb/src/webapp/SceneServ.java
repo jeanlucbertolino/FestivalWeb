@@ -48,6 +48,14 @@ public class SceneServ extends HttpServlet {
 			String majid = request.getParameter("id");
 			String maj = request.getParameter("maj");
 			
+			// Contrôle de cohérence planification
+			Boolean okplanif = Datas.controlplanif(groupe,datec,heure,duree);
+			if (okplanif=false) {
+			// Planification existante pour un autre groupe à cette date/heure 
+				RequestDispatcher rd = request.getRequestDispatcher("/error/ErrPlanif.jsp");
+				rd.forward( request, response );
+			};
+			
 			if (maj==null) {
 			// Création instance Scene
 			// récupération valeur dernier id

@@ -72,19 +72,19 @@
 			</legend>
 			<p><label class="groupe">Groupe .....: </label>
 			<SELECT name="choixgroupe" id="selectgroupe" >
-			
-				<option>       </option>
-				<option> AC/DC </option> 
-				<option> IRON MAIDEN </option>
-				<option> KISS </option>
-				<option> AEROSMITH </option>
-				<option> DEEP PURPLE </option>
-				<option> DEPECHE MODE </option> 
-				<option> THE CURE </option>
-				<option> U2 </option>
-				<option> TEARS FOR FEARS </option>
-				<option> THE ROLLING STONES </option>
-			
+						<!-- Récupération de la liste des groupes autorisées -->	
+			<%
+			ArrayList<String[]> listeGroupe = (ArrayList<String[]>) request.getAttribute("listeGroupe");
+			if (listeGroupe.size()!= 0) {
+			for (int i=0; i<listeGroupe.size();i++)
+			{
+			String[] ligroupe = (String[]) listeGroupe.get(i);
+			%>
+				<option><%=ligroupe[1] %></option>
+			<%
+    		}
+			}
+			%>
 			</SELECT>
 			</fieldset>
 			<br> 
