@@ -32,7 +32,7 @@ import dao.Datas;
  * de la servlet par le serveur d'applications)
  *
  */
-public class Controleur extends HttpServlet {
+public class Controleur_1123 extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	public static Connection connection;
@@ -126,17 +126,6 @@ public class Controleur extends HttpServlet {
  */
 	private void doAccueil(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		// Récupération des groupes
-//		ArrayList<String[]> listegroupe = Datas.initDuree();
-		// Récupération des heures
-//		ArrayList<String[]> listeheure = Datas.initDuree();
-		// Récupération des durées
-		ArrayList<String[]> listeDuree = Datas.initDuree();
-		
-		System.out.println("** Liste des Durées ...: "+ listeDuree);
-		
-		request.setAttribute("listeDuree", listeDuree);
-		
 		disp = request.getRequestDispatcher("/gestion/Creation.jsp");
 		disp.forward(request,response);	
 		

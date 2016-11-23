@@ -589,8 +589,3 @@ function DateInput(DateName, Required, DateFormat, DefaultDate) {
       }
    }
 }
-
-	function datesel(){
-	alert(this.form.orderdate.value);
-	}
-

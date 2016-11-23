@@ -137,26 +137,18 @@
 			<br> 
 			<br>
 				
-		
 			<fieldset class="field4" id="selduree">
 			<legend>
 				<h3>Choisissez une Durée SVP</h3>
 			</legend>
 			<p><label class="choixduree">Durée .....: </label>
 			<SELECT name="selduree" id="selectduree">
-			<!-- Récupération de la liste des Durées autorisées -->	
-			<%
-			ArrayList<String[]> listeDuree =  (ArrayList<String[]>) request.getAttribute("listeDuree");
-			if (listeDuree.size()!= 0) {
-			for (int i=0; i<listeDuree.size();i++)
-			{
-			String[] ligduree = (String[]) listeDuree.get(i);
-			%>
-				<option><%=ligduree[1] %></option>
-			<%
-    		}
-			}
-			%>			
+			
+				<option>       </option>			
+				<option> 1:00 </option> 
+				<option> 1:30 </option>
+				<option> 2:00 </option>
+			
 			</SELECT>
 			</fieldset>
 			<br> 

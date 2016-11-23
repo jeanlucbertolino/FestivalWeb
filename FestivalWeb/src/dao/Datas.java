@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import metier.Duree;
 import webapp.Controleur;
 import webapp.SceneServ;
 
@@ -44,7 +45,13 @@ public class Datas {
 		}
 
 	}
-	
+	/**
+	 *  * * 
+	 * la méthode lastId() permet 
+	 * de récupérer la valeur la plus élevée de l'ID de la table Scene2 afin de l'incrémenter (+1)
+	 * dans le cadre de la création d'une nouvelle planification
+	 * 
+	 */	
 public static int lastId() {
 
 	int id = 0;
@@ -79,7 +86,12 @@ public static int lastId() {
 	}
 	return id;
 }
-
+/**
+ *  * * 
+ * la méthode listScene() permet 
+ * de récupérer la liste de toutes les programmations actives (ID inclu) pour une scène
+ * dans le but de la transmettre aux formulaires qui devront l'afficher
+ */
 public static ArrayList<String[]> listScene() {
 
 ArrayList<String[]> myNumberList = new ArrayList<String[]>();
@@ -118,6 +130,12 @@ try {
 
 return myNumberList;
 }
+
+/**
+ *  * * 
+ * la méthode suppSceneBdD permet 
+ * de supprimer la programmation d'une programmation de scene en récupérant son ID
+ */
 public static void suppSceneBdD(int id) {
 	// TODO Auto-generated method stub
 	Connection conn = Controleur.connection;
@@ -138,7 +156,11 @@ public static void suppSceneBdD(int id) {
 	}
 
 }
-
+/**
+ *  * * 
+ * la méthode modifSceneBdD permet 
+ * de sélectionner une programmation de scene en récupérant son ID
+ */
 public static ArrayList<String[]> modifSceneBdD(int id) {
 	// TODO Auto-generated method stub
 	ArrayList<String[]> liste = new ArrayList<String[]>();
@@ -174,19 +196,14 @@ public static ArrayList<String[]> modifSceneBdD(int id) {
 	}	
 	return liste;
 }
-
+/**
+ *  * * 
+ * la méthode majScene2BdD permet 
+ * de modifier la programmation d'une scene en récupérant son ID
+ */
 public static void majScene2BdD(int id, String groupe, String datec, String heure, String duree) {
 	// TODO Auto-generated method stub
-	/**
-	 *  * * 
-	 * la méthode initGroupeBdD permet 
-	 * 1 - d'initialiser la combo box de sélection depuis la base de données de la table <b>Groupe</b>
-	 * 2 - de créer une instance de la classe <b>Groupe</b> pour chaque occurrence de la table Groupe
-	 * 3 - de renseigner l'arrayList <b>listeGroupe</b> permettant la gestion de la MAJ de la
-	 * 		programmation
-	 * 
-	 * 
-	 */
+
 			Connection conn = Controleur.connection;
 
 			try {
@@ -258,6 +275,74 @@ try {
 }
 
 return myNumberList;
+}
+/**
+ *  * * 
+ * la méthode initGroupe() permet 
+ * 1 - d'initialiser la combo box de sélection depuis la base de données de la table <b>Groupe</b>
+ * 2 - de créer une instance de la classe <b>Groupe</b> pour chaque occurrence de la table Groupe
+ * 3 - de renseigner l'arrayList <b>listeGroupe</b> permettant la gestion de la MAJ de la
+ * 		programmation
+ * 
+ * 
+ */
+public static ArrayList<String[]> initGroupe() {
+	// TODO Auto-generated method stub
+	ArrayList<String[]> groupeList = new ArrayList<String[]>();
+	return groupeList;
+}
+/**
+ *  * * 
+ * la méthode initDuree() permet 
+ * 1 - d'initialiser la combo box de sélection depuis la base de données de la table <b>Durée</b>
+ * 2 - de créer une instance de la classe <b>Duree</b> pour chaque occurrence de la table Duree
+ * 3 - de renseigner l'arrayList <b>dureeList</b> permettant la gestion de la MAJ de la
+ * 		programmation
+ */
+public static ArrayList<String[]> initDuree() {
+	// TODO Auto-generated method stub
+	ArrayList<String[]> dureeList = new ArrayList<String[]>();
+	Connection conn = Controleur.connection;
+
+	try {
+		Statement stmt = conn.createStatement();
+		String reqSql = "select idduree,numduree from Duree order by idduree";
+		
+		System.out.println("ReqSql ...:"+reqSql);
+		
+		ResultSet result =stmt.executeQuery(reqSql);
+
+		while( result.next() ){
+			
+			// Création d'un objet Duree pour chaque enregistrement de la table Duree sélectionné
+			int idDuree = result.getInt(1);
+			String numDuree = result.getString(2);
+			
+			Duree duree = new Duree(idDuree,numDuree);
+			
+			// Renseigner la liste à renvoyer à la servlet
+			String[] strTab = new String[2];
+
+			int idduree = duree.getId();
+			String numduree = duree.getNumDuree();
+	 		
+			// Conversion ID durée en String
+			String iddureeS = Integer.toString(idduree);
+	 		strTab[0]= iddureeS;
+	 		strTab[1]=numduree;
+	 		
+	 		dureeList.add(strTab);
+
+		}
+		result.close();
+
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+	
+	return dureeList;
 }
 
 }

@@ -14,8 +14,8 @@ public class Connect {
  */
 		Connection conn=null;
 		String strNomDriver = "oracle.jdbc.driver.OracleDriver";
-//		String dbURL = "jdbc:oracle:thin:stag02/stag02pw@junon:1521:AFPA";
-		String dbURL = "jdbc:oracle:thin:jluc/honolulu@LocalHost:1521:ORCL";
+		String dbURL = "jdbc:oracle:thin:stag02/stag02pw@junon:1521:AFPA";
+//		String dbURL = "jdbc:oracle:thin:jluc/honolulu@LocalHost:1521:ORCL";
 
 		try {
 			Class.forName(strNomDriver);
