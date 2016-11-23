@@ -108,29 +108,19 @@
 			</legend>
 			<p><label class="choixheure">Heure .....: </label>
 			<SELECT name="selheure" id="selectheure">
-			
-				<option>       </option>			
-				<option> 13:00 </option> 
-				<option> 13:30 </option>
-				<option> 14:00 </option>
-				<option> 14:30 </option>
-				<option> 15:00 </option>
-				<option> 15:30 </option> 
-				<option> 16:00 </option>
-				<option> 16:30 </option>
-				<option> 17:00 </option>
-				<option> 17:30 </option>
-				<option> 18:00 </option> 
-				<option> 18:30 </option>
-				<option> 19:00 </option>
-				<option> 19:30 </option>
-				<option> 20:00 </option>
-				<option> 20:30 </option> 
-				<option> 21:00 </option>
-				<option> 21:30 </option>
-				<option> 22:00 </option>
-				<option> 22:30 </option>
-				<option> 23:00 </option>
+						<!-- Récupération de la liste des Heures autorisées -->	
+			<%
+			ArrayList<String[]> listeHeure = (ArrayList<String[]>) request.getAttribute("listeHeure");
+			if (listeHeure.size()!= 0) {
+			for (int i=0; i<listeHeure.size();i++)
+			{
+			String[] ligheure = (String[]) listeHeure.get(i);
+			%>
+				<option><%=ligheure[1]%>:<%=ligheure[2]%></option>
+			<%
+    		}
+			}
+			%>
 				
 			</SELECT>
 			</fieldset>
@@ -146,7 +136,7 @@
 			<SELECT name="selduree" id="selectduree">
 			<!-- Récupération de la liste des Durées autorisées -->	
 			<%
-			ArrayList<String[]> listeDuree =  (ArrayList<String[]>) request.getAttribute("listeDuree");
+			ArrayList<String[]> listeDuree = (ArrayList<String[]>) request.getAttribute("listeDuree");
 			if (listeDuree.size()!= 0) {
 			for (int i=0; i<listeDuree.size();i++)
 			{

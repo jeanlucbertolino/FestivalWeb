@@ -15,17 +15,17 @@ public class Scene{
 
 	@Override
 	public String toString() {
-		return "Scene [groupe=" + groupe + ", date=" + date + ", heure=" + heure + ", duree=" + duree + "]";
+		return "Scene [groupe=" + groupe + ", date=" + datec + ", heure=" + heure + ", duree=" + duree + "]";
 	}
 
 	public	int			idscene;
 	public String 		groupe;
-	public String 		date;
+	public String 		datec;
 	public String 		heure;
 	public String 		duree;
 
 	// Constructeur par défaut
-	public Scene(int £Id,String £groupe,String £date,String £heure,String £duree)  throws  DateException {
+	public Scene(int £id,String £groupe,String £date,String £heure,String £duree)  throws  DateException {
 		super();
 		// Contrôle de saisie de la date
 //		String dateRaw = affTxtDate(£date);
@@ -35,30 +35,36 @@ public class Scene{
 			throw new DateException();}
 
 			else {
-			
+				this.idscene=£id;
 				this.groupe=£groupe;
-				this.date=£date;
+				this.datec=£date;
 				this.heure=£heure;
 				this.duree=£duree;		
 			}
 		}
+		public String getDatec() {
+		return datec;
+	}
+	public void setDatec(String datec) {
+		this.datec = datec;
+	}
 		public String getGroupe() {
 			return groupe;
 		}
 		public String getDate() {
-			return date;
+			return datec;
 		}
 		public void setGroupe(String groupe) {
 			this.groupe = groupe;
 		}
-		public void setDate(String date) {
-			this.date = date;
+		public void setDate(String £date) {
+			this.datec = £date;
 		}
-		public void setHeure(String heure) {
-			this.heure = heure;
+		public void setHeure(String £heure) {
+			this.heure = £heure;
 		}
-		public void setDuree(String duree) {
-			this.duree = duree;
+		public void setDuree(String £duree) {
+			this.duree = £duree;
 		}
 		public String getHeure() {
 			return heure;

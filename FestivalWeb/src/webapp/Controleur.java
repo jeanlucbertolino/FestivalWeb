@@ -129,12 +129,11 @@ public class Controleur extends HttpServlet {
 		// Récupération des groupes
 //		ArrayList<String[]> listegroupe = Datas.initDuree();
 		// Récupération des heures
-//		ArrayList<String[]> listeheure = Datas.initDuree();
+		ArrayList<String[]> listeheure = Datas.initHeure();
+		request.setAttribute("listeHeure", listeheure);
+		
 		// Récupération des durées
 		ArrayList<String[]> listeDuree = Datas.initDuree();
-		
-		System.out.println("** Liste des Durées ...: "+ listeDuree);
-		
 		request.setAttribute("listeDuree", listeDuree);
 		
 		disp = request.getRequestDispatcher("/gestion/Creation.jsp");
@@ -213,6 +212,15 @@ public class Controleur extends HttpServlet {
 		ArrayList<String[]> liste=Datas.modifSceneBdD(id);
 				
 		String maj= "ok";
+		// Récupération des groupes
+//		ArrayList<String[]> listegroupe = Datas.initDuree();
+		// Récupération des heures
+		ArrayList<String[]> listeheure = Datas.initHeure();
+		request.setAttribute("listeHeure", listeheure);
+		
+		// Récupération des durées
+		ArrayList<String[]> listeDuree = Datas.initDuree();
+		request.setAttribute("listeDuree", listeDuree);
 		
 		request.setAttribute("maj", maj);
 		request.setAttribute("id", id);

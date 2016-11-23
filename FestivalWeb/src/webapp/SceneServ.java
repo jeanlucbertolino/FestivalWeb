@@ -37,7 +37,7 @@ public class SceneServ extends HttpServlet {
 			PrintWriter out = response.getWriter() ;
 			response.setContentType( "text/html");
 			
-			// Récupération des informations du formulaire
+			// Récupération des informations du formulaire	
 			String groupe = request.getParameter("groupesel");
 			String datec = request.getParameter("datesel");
 			String heure = request.getParameter("heuresel");
@@ -52,15 +52,9 @@ public class SceneServ extends HttpServlet {
 			// Création instance Scene
 			// récupération valeur dernier id
 			
-//			String lastId = new String();
-//			lastId="0";
 			int lastId=Datas.lastId();
 			System.out.println(lastId);
-//			if (lastId.isEmpty()) {
-//				lastId="0";
-//			}
-//			int derId=Integer.parseInt(lastId);
-//			int id=derId+1;
+
 			int id=lastId+1;
 			
 			 try {
@@ -69,19 +63,25 @@ public class SceneServ extends HttpServlet {
 				System.out.println(id+"**"+groupe+"**"+datec+"**"+heure+"**"+duree);			 
 			 
 			 // MAJ table Scene2
-			 Datas.initScene2BdD(id,groupe,datec,heure,duree);
+				int £id = scene.getIdscene();
+				String £groupe= scene.getGroupe();
+				String £datec= scene.getDatec();
+				String £heure= scene.getHeure();
+				String £duree= scene.getDuree();
+				
+			 Datas.initScene2BdD(£id,£groupe,£datec,£heure,£duree);
 			 
 			 		
-			    request.setAttribute("id", id);
-				request.setAttribute("groupe", groupe);
-				request.setAttribute("datec", datec);
-				request.setAttribute("heure", heure);
-				request.setAttribute("duree", duree);
+			    request.setAttribute("id", £id);
+				request.setAttribute("groupe", £groupe);
+				request.setAttribute("datec", £datec);
+				request.setAttribute("heure", £heure);
+				request.setAttribute("duree", £duree);
 				
-				System.out.println(id+"--"+groupe+"--"+datec+"--"+heure+"--"+duree);
+				System.out.println(£id+"--"+£groupe+"--"+£datec+"--"+£heure+"--"+£duree);
 							 
 
-				// liste des emprunts existants
+				// liste des scènes existantes
 				ArrayList<String[]> liste = Datas.listScene();
 //				ArrayList liste = new ArrayList();
 //				liste.add("Test");

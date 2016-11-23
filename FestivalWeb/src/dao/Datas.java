@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import metier.Duree;
+import metier.Heure;
 import webapp.Controleur;
 import webapp.SceneServ;
 
@@ -279,7 +280,7 @@ return myNumberList;
 /**
  *  * * 
  * la méthode initGroupe() permet 
- * 1 - d'initialiser la combo box de sélection depuis la base de données de la table <b>Groupe</b>
+ * 1 - d'initialiser la combo box de sélection des groupes depuis la base de données de la table <b>Groupe</b>
  * 2 - de créer une instance de la classe <b>Groupe</b> pour chaque occurrence de la table Groupe
  * 3 - de renseigner l'arrayList <b>listeGroupe</b> permettant la gestion de la MAJ de la
  * 		programmation
@@ -291,6 +292,66 @@ public static ArrayList<String[]> initGroupe() {
 	ArrayList<String[]> groupeList = new ArrayList<String[]>();
 	return groupeList;
 }
+
+/**
+*  * * 
+* la méthode initHeure() permet 
+* 1 - d'initialiser la combo box de sélection des heures autorisées depuis la base de données de la table <b>Heure</b>
+* 2 - de créer une instance de la classe <b>Heure</b> pour chaque occurrence de la table Heure
+* 3 - de renseigner l'arrayList <b>listeHeure</b> permettant la gestion de la MAJ de la
+* 		programmation
+*
+*/
+public static ArrayList<String[]> initHeure() {
+	// Constitution des instances de la classe Heure + ArrayList des Heures
+		
+	ArrayList<String[]> heureList = new ArrayList<String[]>();
+	Connection conn = Controleur.connection;
+
+	try {
+		Statement stmt = conn.createStatement();
+		String reqSql = "select idheure,numheure,numminute from Heure order by idheure";
+		
+		System.out.println("ReqSql ...:"+reqSql);
+		
+		ResultSet result =stmt.executeQuery(reqSql);
+
+		while( result.next() ){
+			
+			int idHeure = result.getInt(1);
+			String numHeure = result.getString(2);
+			String numMinute = result.getString(3);
+			
+			// Création d'un objet Heure pour chaque enregistrement de la table Heure sélectionné			
+			Heure heure = new Heure(idHeure,numHeure,numMinute);
+			
+			// Renseigner la liste à renvoyer à la servlet
+			String[] strTab = new String[3];
+
+			int idheure = heure.getIdHeure();
+			String numheure = heure.getNumHeure();
+			String numminute = heure.getNumMinute();
+	 		
+			// Conversion ID durée en String
+			String idheureS = Integer.toString(idheure);
+	 		strTab[0]= idheureS;
+	 		strTab[1]=numheure;
+	 		strTab[2]=numminute;
+	 		
+	 		heureList.add(strTab);
+
+		}
+		result.close();
+
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+	return heureList;
+}
+
+
 /**
  *  * * 
  * la méthode initDuree() permet 
@@ -300,7 +361,8 @@ public static ArrayList<String[]> initGroupe() {
  * 		programmation
  */
 public static ArrayList<String[]> initDuree() {
-	// TODO Auto-generated method stub
+	// Constitution des instances de la classe Duree + ArrayList des durées
+	
 	ArrayList<String[]> dureeList = new ArrayList<String[]>();
 	Connection conn = Controleur.connection;
 
@@ -314,10 +376,10 @@ public static ArrayList<String[]> initDuree() {
 
 		while( result.next() ){
 			
-			// Création d'un objet Duree pour chaque enregistrement de la table Duree sélectionné
 			int idDuree = result.getInt(1);
 			String numDuree = result.getString(2);
 			
+			// Création d'un objet Duree pour chaque enregistrement de la table Duree sélectionné			
 			Duree duree = new Duree(idDuree,numDuree);
 			
 			// Renseigner la liste à renvoyer à la servlet
