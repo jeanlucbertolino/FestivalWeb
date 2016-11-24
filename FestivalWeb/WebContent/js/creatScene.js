@@ -8,7 +8,7 @@ function controler(){
 	rq1=("Veuillez renseigner un groupe SVP !!!");	
 	rq2=("Veuillez renseigner une date SVP !!!");
 	rq3=("Veuillez renseigner une heure SVP !!!");
-	rq4=("Veuillez renseigner une durée SVP !!!");
+	rq4=("Veuillez renseigner une duree SVP !!!");
 
 	// <!-- Informations Groupe
 	var groupeselvalue=document.getElementById("groupesel").value;
@@ -121,12 +121,12 @@ function valider(){
 	var xboolean=controler();
 	return xboolean;
 	
-	}
+	}	
 function modifier(){
 	// <!-- Affichage des infos saisies
 	// <!-- Groupe
 	var groupe = document.getElementById("selectgroupe").value;
-	if (groupe!=" ") {
+	if (groupe!="") {
 	document.getElementById('groupesel').value = groupe;
 	}
 	// <!-- Date
@@ -134,12 +134,12 @@ function modifier(){
 // <!-- document.getElementById('datesel').value = date;
 	// <!-- Heure
 	var heure = document.getElementById("selectheure").value;
-	if (heure!=" ") {
+	if (heure!="") {
 	document.getElementById('heuresel').value = heure;
 	}
 	// <!-- Durée
 	var duree = document.getElementById("selectduree").value;
-	if (duree!=" ") {
+	if (duree!="") {
 	document.getElementById('dureesel').value = duree;
 	}
 	var xboolean=controler();

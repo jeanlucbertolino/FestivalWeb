@@ -27,7 +27,8 @@ ArrayList<String[]> liste =  (ArrayList<String[]>) request.getAttribute("listSce
 </br>
 <div class="centrage">
 
-<h3><p>RUNING ORDER</p></h3></br>
+<h3><p>LISTE DES GROUPES</p></h3></br>
+<h4><p>Modification ou suppression d'une programmation</p></h4></br>
 			
 <%-- Affichage des Scènes existantes --%>
 <table border='1' align="center"  width="800">
@@ -55,7 +56,7 @@ for (int i=0; i<liste.size();i++)
 
 <div id="div_retour" class="centrage">
 <table border="" align="center">
-<span><input type="submit" value="Programmation" ></input></span>
+<span><input type="submit" value="Programmation" ></input></span><span><input type="button" onclick="location.href='<%= request.getContextPath() %>/Festival/consult';" value="Consultation"></span>
 </table>
 </div>
 

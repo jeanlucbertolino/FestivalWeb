@@ -234,7 +234,15 @@ public static void majScene2BdD(int id, String groupe, String datec, String heur
 				e.printStackTrace();
 			}	
 }
-
+/**
+ * la méthode SearchScene() permet de recherche les occurrences de la table des planifications de scènes (Scene2) correspondant aux 
+ * paramètres suivants reçus depuis un formulaire de recherche sur les critères ci-dessous reçus en paramètre sur le principe "commence par"
+ * @param £groupe
+ * @param £datec
+ * @param £heure
+ * @param £duree
+ * @return	la méthode retourne les occurrences correspondant aux critères sous forme de collection (ArrayList de tableau de String)
+ */
 public static ArrayList<String[]> SearchScene(String £groupe, String £datec, String £heure, String £duree) {
 	// TODO Auto-generated method stub
 
@@ -244,7 +252,8 @@ Connection conn = Controleur.connection;
 
 try {
 	Statement stmt = conn.createStatement();
-	String reqSql = "select id,groupe,datec,heure,duree from Scene2 where groupe like '"+£groupe+"%' and datec like '"+£datec+"%' and heure like '"+£heure+ "%' and duree like '"+£duree+"%'";
+	String reqSql = "select id,groupe,datec,heure,duree from Scene2 where groupe like '"+£groupe+"%' and datec like '"+£datec+"%' and heure like '"+£heure+ "%' and duree like '"+£duree+"%'"
+			+" order by heure,duree,groupe";
 	
 	System.out.println("ReqSql ...:"+reqSql);
 	
@@ -451,15 +460,16 @@ public static ArrayList<String[]> initDuree() {
 	
 	return dureeList;
 }
-public static Boolean controlplanif(String groupe,String datec,String heure,String duree) {
+public static int controlplanif(String £groupe,String £datec,String £heure,String £duree) {
 	// Contrôle si pas de programmation prévue pour un autre groupe à cette Date/heure
 	
 	Connection conn = Controleur.connection;
-	Boolean okplanif=false;
+	
+	int cpterror=0;
 	
 	try {
 		Statement stmt = conn.createStatement();
-		String reqSql = "select id from Scene2 where datec='"+datec+"' and heure='"+heure+"'";
+		String reqSql = "select id from Scene2 where datec='"+£datec+"' and heure='"+£heure+"' and groupe <> '"+£groupe+"'";
 		
 		System.out.println("ReqSql ...:"+reqSql);
 		
@@ -467,8 +477,8 @@ public static Boolean controlplanif(String groupe,String datec,String heure,Stri
 		
 		while( result.next() ){
 			
-			System.out.println("planification existe déjà ...:"+groupe);	
-			okplanif=true;
+			System.out.println("planification existe déjà ...:"+£groupe);	
+			cpterror++;
 		}
 		result.close();
 
@@ -476,8 +486,8 @@ public static Boolean controlplanif(String groupe,String datec,String heure,Stri
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-	
-	return okplanif;
+
+	return cpterror;
 }
 
 }

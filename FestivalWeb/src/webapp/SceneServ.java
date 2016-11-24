@@ -30,7 +30,10 @@ public class SceneServ extends HttpServlet {
 //        	connection = Connect.initConnexion();
 //        	System.out.println("connexion :"+connection);
         }
-	
+	/**
+	 * Cette méthode permet de traiter les informations en provenance du formulaire de gestion (création/modification)
+	 * et d'agir en conséquence sur la BdD et l'affichage des informations traitées
+	 */
 	protected void doPost (HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 			// TODO Auto-generated method stub
@@ -49,15 +52,18 @@ public class SceneServ extends HttpServlet {
 			String maj = request.getParameter("maj");
 			
 			// Contrôle de cohérence planification
-			Boolean okplanif = Datas.controlplanif(groupe,datec,heure,duree);
-			if (okplanif=false) {
+			int cpterror = Datas.controlplanif(groupe,datec,heure,duree);
+			if (cpterror==99999) {
 			// Planification existante pour un autre groupe à cette date/heure 
 				RequestDispatcher rd = request.getRequestDispatcher("/error/ErrPlanif.jsp");
 				rd.forward( request, response );
-			};
-			
+			}
+			else {
+				
+			// Test du paramètre "maj" , si null==> création d'occurence si renseigné==> Modification
+			// Cas de la création d'une planification de scène
 			if (maj==null) {
-			// Création instance Scene
+
 			// récupération valeur dernier id
 			
 			int lastId=Datas.lastId();
@@ -66,6 +72,9 @@ public class SceneServ extends HttpServlet {
 			int id=lastId+1;
 			
 			 try {
+				 
+					// Création instance Scene
+				 
 				Scene scene = new Scene(id,groupe,datec,heure,duree);
 
 				System.out.println(id+"**"+groupe+"**"+datec+"**"+heure+"**"+duree);			 
@@ -79,7 +88,9 @@ public class SceneServ extends HttpServlet {
 				
 			 Datas.initScene2BdD(£id,£groupe,£datec,£heure,£duree);
 			 
-			 		
+	// Création des attributs de l'instance request à transférer au formulaire des planifications des scènes
+			 // en vue d'afficher l'occurrence créée
+			 
 			    request.setAttribute("id", £id);
 				request.setAttribute("groupe", £groupe);
 				request.setAttribute("datec", £datec);
@@ -91,8 +102,8 @@ public class SceneServ extends HttpServlet {
 
 				// liste des scènes existantes
 				ArrayList<String[]> liste = Datas.listScene();
-//				ArrayList liste = new ArrayList();
-//				liste.add("Test");
+
+				// création d'un attribut de l'instance request pointant sur la liste des planifications reçue de Datas.listScene()
 				request.setAttribute("listScene", liste);
 				
 				response.setContentType( "text/html");
@@ -103,9 +114,9 @@ public class SceneServ extends HttpServlet {
 					e.printStackTrace();
 				}	 
 			}
+			// Cas de la modification d'une planification de scène
 			if (maj!=null) {
-			// Modification instance Scene
-		
+					
 			 try {
 				 System.out.println("majId ...:"+majid);
 				 int id=Integer.parseInt(majid);
@@ -124,10 +135,12 @@ public class SceneServ extends HttpServlet {
 				System.out.println(majid+"--"+groupe+"--"+datec+"--"+heure+"--"+duree);
 							 
 
-				// liste des emprunts existants
+				// liste des planifications existantes
 				ArrayList<String[]> liste = Datas.listScene();
-//				ArrayList liste = new ArrayList();
-//				liste.add("Test");
+				
+				// Création des attributs de l'instance request à transférer au formulaire des planifications des scènes
+				 // en vue d'afficher l'occurrence modifiée
+				
 				request.setAttribute("listScene", liste);
 				
 				response.setContentType( "text/html");
@@ -136,9 +149,14 @@ public class SceneServ extends HttpServlet {
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}	 
+				}	
+			}
 			}				
 			}
+	/**
+	 * Cette méthode permet de rediriger la navigation vers des opérations ne nécessitant pas de modification
+	 * de badD ou de situation fonctionnelles (formulaire de recherche consultation par exemple ...)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// recuperation de l'url (à partir du chemin relatif à la servlet application cad après /bb)
@@ -159,6 +177,14 @@ public class SceneServ extends HttpServlet {
 		disp.forward(request,response);	
 		
 	}
+	/**
+	 * la méthode doRecherche() permet d'afficher le formulaire de consultation des planifications existantes
+	 * @param request	cette instance permet de récupérer les paramètres en provenance de la même servlet
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	
 	private void doRecherche(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 			// Constitution de la liste des groupes en fonction des critères de recherche

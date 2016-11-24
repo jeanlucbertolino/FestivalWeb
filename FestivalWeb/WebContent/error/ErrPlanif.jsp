@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" href="http://localhost:8085/FestivalWeb/style/modal.css" />
 <title>Planification existante</title>
 </head>
 <body>

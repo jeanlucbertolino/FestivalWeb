@@ -17,10 +17,17 @@ pageEncoding="ISO-8859-1"%>
 <div class="centrage">
 <%
 String sup = (String) request.getAttribute("sup");
-if (request.getAttribute("sup") == null) { 
+
+if (request.getAttribute("sup") == null) {
+	if (request.getAttribute("maj") == null) {
 %>
 <h2><p>Dernier enregistrement créé</p></h2>
 <%
+	} else {
+		%>
+		<h2><p>Dernier enregistrement modifié</p></h2>
+		<%
+	}
 }
 else {
 %>
@@ -84,7 +91,7 @@ for (int i=0; i<liste.size();i++)
 
 <div id="div_retour" class="centrage">
 <table border="" align="center">
-<span><input type="submit" value="Programmation" ></input></span>
+<span><input type="submit" name="program" value="Programmation" ></input></span>
 </table>
 </div>
 

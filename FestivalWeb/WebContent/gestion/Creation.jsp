@@ -115,9 +115,16 @@
 			for (int i=0; i<listeHeure.size();i++)
 			{
 			String[] ligheure = (String[]) listeHeure.get(i);
+			if (ligheure[1] !=" ") {
 			%>
-				<option><%=ligheure[1]%>:<%=ligheure[2]%></option>
+				<option><%=ligheure[1]%> <%=ligheure[2]%></option>
 			<%
+			}
+			else {
+				%>
+				<option> </option>
+			<%
+				}
     		}
 			}
 			%>
@@ -223,6 +230,7 @@
             <% } %>
 			<span><input type="button" onclick="location.href='<%= request.getContextPath() %>/Festival/aff';" value="Planification"></span>
 			<span><input type="button" onclick="location.href='<%= request.getContextPath() %>/Festival/consult';" value="Consultation"></span>
+			
   		  	<span><input type="button" onclick="this.form.reset()" value="Clear"></span>
   		</DIV>
 
